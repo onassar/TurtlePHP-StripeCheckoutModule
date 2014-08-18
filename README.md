@@ -1,4 +1,4 @@
-TurtlePHP-UsersModule
+TurtlePHP-StripeCheckoutModule
 ======================
 
 ### Depdencies

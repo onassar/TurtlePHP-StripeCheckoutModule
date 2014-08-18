@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\Users;
+    namespace Modules\StripeCheckout;
 
     /**
      * Plugin/vendors Requirements

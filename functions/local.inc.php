@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\StripeCustomers;
+    namespace Modules\StripeCheckout;
 
     /**
      * getConfig
@@ -13,7 +13,7 @@
     {
         $args = func_get_args();
         return call_user_func_array(
-            array('\Modules\StripeCustomers', 'getConfig'),
+            array('\Modules\StripeCheckout', 'getConfig'),
             $args
         );
     }

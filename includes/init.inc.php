@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\Users;
+    namespace Modules\StripeCheckout;
 
     // closure (variable scope preservation)
     $closure = function() {
@@ -14,9 +14,6 @@
         DEFINE(__NAMESPACE__ . '\MODULE', $parent);
 
         // include models, controllers, helpers
-        require_once MODULE . '/models/User.class.php';
-        require_once MODULE . '/controllers/Users.class.php';
-        require_once MODULE . '/controllers/Emails.class.php';
         require_once MODULE . '/includes/validation/ProjectSchemaValidator.class.php';
 
         // flow includes
@@ -25,10 +22,6 @@
         require_once 'requirements.inc.php';
         require_once \Modules\Users::getConfigPath();
         require_once 'routes.inc.php';
-
-        // overhead
-        \Modules\Users::autoLogin();
-        \Modules\Users::trackLastActive();
     };
 
     // run/clear
