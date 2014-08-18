@@ -11,16 +11,7 @@
     // hash
     $required = array(
         '\Plugin\Config' => 'TurtlePHP-ConfigPlugin',
-        '\Plugin\Emailer' => 'TurtlePHP-EmailerPlugin',
-        '\Plugin\CampaignMonitor' => 'TurtlePHP-CampaignMonitorPlugin',
-        'Geo' => 'PHP-Geo',
-        'RequestCache' => 'PHP-RequestCache',
-        'MySQLQuery' => 'PHP-MySQL',
-        'Query' => 'PHP-Query',
-        'SMSession' => 'PHP-SecureSessions',
-        'Schema' => 'PHP-JSON-Validation',
-        'SmartSchema' => 'PHP-JSON-Validation',
-        'Schema' => 'PHP-JSON-Validation'
+        'Stripe_Customer' => 'stripe-php'
     );
 
     // checks
@@ -41,10 +32,7 @@
 
     // hash
     $required = array(
-        'UsersController',
-        'UserAccessor',
-        'UserModel',
-        'EmailsController'
+        'StripeCheckout'
     );
 
     // checks

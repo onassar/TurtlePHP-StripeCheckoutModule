@@ -8,14 +8,9 @@
 
     // add module routes to application
     \Turtle\Application::addRoutes(array(
-        '^' . ($paths['']) . '$' => array(// G
+        '^' . ($paths['webhooks']) . '$' => array(// G
             'module' => true,
-            'controller' => 'Modules\Users\Emails',
-            'action' => 'actionLoginBypass'
-        ),
-        '^' . ($paths['emails']['resetPassword']) . '$' => array(// G
-            'module' => true,
-            'controller' => 'Modules\Users\Emails',
-            'action' => 'actionResetPassword'
+            'controller' => 'Modules\StripeCheckout\StripeCheckout',
+            'action' => 'actionWebhooks'
         )
     ));

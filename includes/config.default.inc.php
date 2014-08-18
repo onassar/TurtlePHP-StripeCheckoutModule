@@ -6,22 +6,21 @@
     // 
     $applyTaxes = true;
     $currency = 'usd';
-    $province = 'ontario';
 
     /**
      * Credentials
      * 
      */
     $credentials = array(
-        'test' => array(
-            'secretKey' => 'sk_test_***',
-            'publishableKey' => 'pk_test_***'
-        ),
-        'live' => array(
+        'secretKey' => 'sk_test_***',
+        'publishableKey' => 'pk_test_***'
+    );
+    if (getRole() === 'prod') {
+        $credentials = array(
             'secretKey' => 'sk_live_***',
             'publishableKey' => 'pk_live_***'
-        ),
-    );
+        );
+    }
 
     // config storage
     \Plugin\Config::add(
