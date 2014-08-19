@@ -4,12 +4,12 @@
     namespace Modules;
 
     /**
-     * StripeCheckout
+     * Stripe
      * 
      * @author   Oliver Nassar <onassar@gmail.com>
      * @abstract
      */
-    abstract class StripeCheckout
+    abstract class Stripe
     {
         /**
          * _configPath
@@ -246,7 +246,7 @@ er(pr($plan, true));
         public static function getConfig()
         {
             $args = func_get_args();
-            array_unshift($args, 'TurtlePHP-StripeCheckoutModule');
+            array_unshift($args, 'TurtlePHP-StripeModule');
             return call_user_func_array(
                 array('\Plugin\Config', 'retrieve'),
                 $args
@@ -282,5 +282,5 @@ er(pr($plan, true));
     $parent = ($info['dirname']) . '/' . ($info['basename']);
     $configPath = $parent . '/includes/config.inc.php';
     if (is_file($configPath)) {
-        Users::setConfigPath($configPath);
+        Stripe::setConfigPath($configPath);
     }

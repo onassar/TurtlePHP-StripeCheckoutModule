@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\StripeCheckout;
+    namespace Modules\Stripe;
 
     // Path/view settings
     $paths = getConfig('paths');
@@ -10,7 +10,7 @@
     \Turtle\Application::addRoutes(array(
         '^' . ($paths['webhooks']) . '$' => array(// G
             'module' => true,
-            'controller' => 'Modules\StripeCheckout\StripeCheckout',
-            'action' => 'actionWebhooks'
+            'controller' => 'Modules\Stripe\Webhooks',
+            'action' => 'actionIndex'
         )
     ));

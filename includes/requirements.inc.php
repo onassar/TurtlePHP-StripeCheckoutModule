@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\StripeCheckout;
+    namespace Modules\Stripe;
 
     /**
      * Plugin/vendors Requirements
@@ -11,6 +11,7 @@
     // hash
     $required = array(
         '\Plugin\Config' => 'TurtlePHP-ConfigPlugin',
+        '\Modules\Users' => 'TurtlePHP-UsersModule',
         'Stripe_Customer' => 'stripe-php'
     );
 
@@ -32,7 +33,7 @@
 
     // hash
     $required = array(
-        'StripeCheckout'
+        'StripeWebhooks'
     );
 
     // checks

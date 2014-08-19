@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\StripeCheckout;
+    namespace Modules\Stripe;
 
     // 
     $applyTaxes = true;
@@ -15,19 +15,22 @@
         'secretKey' => 'sk_test_***',
         'publishableKey' => 'pk_test_***'
     );
-    if (getRole() === 'prod') {
-        $credentials = array(
-            'secretKey' => 'sk_live_***',
-            'publishableKey' => 'pk_live_***'
-        );
-    }
+
+    /**
+     * Paths
+     * 
+     */
+    $paths = array(
+        'webhooks' => '/stripe/webhooks'
+    );
 
     // config storage
     \Plugin\Config::add(
-        'TurtlePHP-StripeCheckoutModule',
+        'TurtlePHP-StripeModule',
         array(
             'applyTaxes' => $applyTaxes,
             'currency' => $currency,
-            'credentials' => $credentials
+            'credentials' => $credentials,
+            'paths' => $paths
         )
     );

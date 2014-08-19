@@ -1,13 +1,14 @@
 <?php
 
     // namespaces
-    namespace Modules\StripeCustomers;
+    namespace Modules\Stripe;
 
     /**
      * Webhooks
      * 
+     * @extends \StripeWebhooksController
      * @final
      */
-    final class Webhooks
+    final class WebhooksController extends \StripeWebhooksController
     {
     }

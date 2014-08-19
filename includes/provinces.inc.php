@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\StripeCheckout;
+    namespace Modules\Stripe;
 
     // Tax information
     $provinces = array(
@@ -139,7 +139,7 @@
 
     // config storage
     \Plugin\Config::add(
-        'TurtlePHP-StripeCheckoutModule',
+        'TurtlePHP-StripeModule',
         array(
             'provinces' => $provinces
         )
