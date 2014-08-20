@@ -12,7 +12,10 @@
     $required = array(
         '\Plugin\Config' => 'TurtlePHP-ConfigPlugin',
         '\Modules\Users' => 'TurtlePHP-UsersModule',
-        'Stripe_Customer' => 'stripe-php'
+        'Stripe_Customer' => 'stripe-php',
+        'Schema' => 'PHP-JSON-Validation',
+        'SmartSchema' => 'PHP-JSON-Validation',
+        'Schema' => 'PHP-JSON-Validation'
     );
 
     // checks
@@ -33,7 +36,7 @@
 
     // hash
     $required = array(
-        'StripeWebhooks'
+        'StripeWebhooksController'
     );
 
     // checks

@@ -1,0 +1,14 @@
+[
+    {
+        "validator": ["Modules\\Stripe\\DataValidator", "dataInputted"],
+        "blocking": true
+    },
+    {
+        "validator": ["Modules\\Stripe\\StripeValidator", "validEventInputted"],
+        "blocking": true
+    },
+    {
+        "validator": ["Modules\\Stripe\\StripeValidator", "uniqueEventInputted"],
+        "blocking": true
+    }
+]

@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\Users;
+    namespace Modules\Stripe;
 
     /**
      * SecurityValidator

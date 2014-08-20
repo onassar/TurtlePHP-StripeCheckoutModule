@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\Users;
+    namespace Modules\Stripe;
 
     /**
      * ProjectSchemaValidator
@@ -31,7 +31,8 @@
             $this->_libraries = array(
                 APP . '/vendors/PHP-JSON-Validation/DataValidator.class.php',
                 APP . '/vendors/PHP-JSON-Validation/StringValidator.class.php',
-                MODULE . '/includes/validation/SecurityValidator.class.php'
+                MODULE . '/includes/validation/SecurityValidator.class.php',
+                MODULE . '/includes/validation/StripeValidator.class.php'
             );
             parent::__construct($schema, $data);
 
