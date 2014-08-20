@@ -72,14 +72,14 @@
         public function getStripeEventByToken($token)
         {
             // Query
-            $query = (new Query());
+            $query = (new \Query());
             $query->select('id');
             $query->from('stripeEvents');
             $query->where('status', 'open');
             $query->andWhere('token', mysql_real_escape_string($token));
 
             // Retrieve matching records
-            $mySQLQuery = (new MySQLQuery($query->parse()));
+            $mySQLQuery = (new \MySQLQuery($query->parse()));
             $records = $mySQLQuery->getResults();
 
             // Not found

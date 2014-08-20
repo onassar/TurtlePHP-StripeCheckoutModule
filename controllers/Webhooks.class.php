@@ -47,7 +47,7 @@
                 APP . '/schemas/stripeWebhooks.index.post.json',
                 true
             ));
-            $validator = (new \ProjectSchemaValidator(
+            $validator = (new ProjectSchemaValidator(
                 $schema,
                 $this->getRequest()
             ));
