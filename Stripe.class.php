@@ -86,9 +86,10 @@
          * @access public
          * @static
          * @param  \UserAccessor $user
+         * @param  integer $planId
          * @return Stripe_Customer
          */
-        public static function createRecords(\UserAccessor $user)
+        public static function createRecords(\UserAccessor $user, $planId)
         {
             /**
              * Customer
@@ -231,6 +232,26 @@ er(pr($plan, true));
                 }
                 throw($exception);
             }
+
+            // Update user details
+            $data = array(
+                'id' => $customer->id,
+                'cc' => array(
+                    'last4' => $card->last4,
+                    'expiry' => array(
+                        'month' => $card->exp_month,
+                        'year' => $card->exp_year
+                    ),
+                    'type' => $card->type,
+                    'country' => $card->country
+                )
+            );
+            $user->update(
+                array(
+                    'stripe' => json_encode($data),
+                    'planId' => $planId
+                )
+            );
 
             // Done
             return $customer;
