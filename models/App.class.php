@@ -1,7 +1,7 @@
 <?php
 
     // namespaces
-    namespace Modules\Stripes;
+    namespace Modules\Stripe;
 
     /**
      * AppModel
@@ -145,11 +145,12 @@
             $values = array();
 
             // loop through supplied details
+            $link = \MySQLConnection::getLink();
             foreach ($details as $column => $value) {
 
                 // Single quote wrappers
                 array_push($columns, $column);
-                $value = '\'' . mysql_real_escape_string($value) . '\'';
+                $value = '\'' . ($link->escape_string($value)) . '\'';
                 array_push($values, $value);
             }
 

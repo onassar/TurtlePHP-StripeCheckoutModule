@@ -81,71 +81,171 @@
         }
 
         /**
-         * createRecords
+         * addCreditCard
          * 
          * @access public
          * @static
          * @param  \UserAccessor $user
-         * @param  integer $planId
-         * @return Stripe_Customer
+         * @param  string $token
+         * @return Stripe_Card|false
          */
-        public static function createRecords(\UserAccessor $user, $planId)
+        public static function addCreditCard(\UserAccessor $user, $token)
         {
-            /**
-             * Customer
-             * 
-             */
-
-            // Customer record
-            if ($user->stripeCustomerId === '') {
-                try {
-                    $customer = \Stripe_Customer::create(array(
-                        'email' => $user->email
-                    ));
-                } catch (\Exception $exception) {
-                    el('Exception while creating customer');
-                    throw($exception);
-                }
-            } else {
-                $customer = \Stripe_Customer::retrieve(
-                    $user->stripeCustomerId
-                );
-            }
-
-            /**
-             * Card
-             * 
-             */
-
-            // Add to customer
             try {
-                $card = $customer->cards->create(array(
-                    'card' => $_POST['stripeToken']
-                ));
+                return $user->getStripeCustomer()->getRaw()->cards->create(
+                    array(
+                        'card' => $token
+                    )
+                );
             } catch (\Exception $exception) {
                 el('Exception while adding card');
-                try {
-                    $customer->delete();
-                } catch (\Exception $secondary) {
-                    el('Exception while cleaning upgrade');
-                }
-                throw($exception);
             }
+            return false;
+        }
 
-            // Set as default
+        /**
+         * createCustomer
+         * 
+         * @access public
+         * @static
+         * @param  \UserAccessor $user
+         * @return StripeCustomerAccessor
+         */
+        public static function createCustomer(\UserAccessor $user)
+        {
             try {
-                $customer->default_card = $card->id;
-                $customer->save();
+                \Stripe_Customer::create(array(
+                    'email' => $user->email
+                ));
+                return $user->getStripeCustomer();
+            } catch (\Exception $exception) {
+                el('Exception while creating customer');
+            }
+            return false;
+        }
+
+        /**
+         * setDefaultCreditCard
+         * 
+         * @access public
+         * @static
+         * @param  \UserAccessor $user
+         * @param  string $token
+         * @return Stripe_Card|false
+         */
+        public static function setDefaultCreditCard(\UserAccessor $user, $token)
+        {
+            try {
+                $stripeCustomer = $user->getStripeCustomer();
+                $stripeCard = $stripeCustomer->getCreditCard($token);
+                $stripeCustomer->getRaw()->default_card = $stripeCard->getRaw()->id;
+                $stripeCustomer->getRaw()->save();
             } catch (\Exception $exception) {
                 el('Exception while saving default card');
-                try {
-                    $card->delete();
-                    $customer->delete();
-                } catch (\Exception $secondary) {
-                    el('Exception while cleaning upgrade');
-                }
-                throw($exception);
             }
+            return false;
+        }
+
+        /**
+         * getStripeCustomer
+         * 
+         * @access public
+         * @static
+         * @return void
+         */
+        public static function getStripeCustomer()
+        {
+            prx('s');
+        }
+
+        /**
+         * init
+         * 
+         * @access public
+         * @static
+         * @return void
+         */
+        public static function init()
+        {
+            /**
+             * getStripeCustomer
+             * 
+             * @access public
+             * @return StripeCustomerAccessor
+             */
+            \Modules\Users::addAccessorMethod(
+                'User',
+                'getStripeCustomer',
+                function($self) {
+                    prx($self);
+                }
+            );
+
+            /**
+             * createStripeCustomer
+             * 
+             * @access public
+             * @return StripeCustomerAccessor
+             */
+            \Modules\Users::addAccessorMethod(
+                'User',
+                'createStripeCustomer',
+                function($self) {
+                    prx($self);
+                }
+            );
+        }
+
+        /**
+         * checkout
+         * 
+         * @access public
+         * @static
+         * @param  \UserAccessor $user
+         * @param  string $token
+         * @param  integer $planId
+         * @param  string $provinceHandle
+         * @return Stripe_Customer
+         */
+        public static function checkout(\UserAccessor $user, $token, $planId, $provinceHandle)
+        {
+            // Customer
+            $stripeCustomer = $user->getStripeCustomer();
+            if ($stripeCustomer === false) {
+                $stripeCustomer = $user->createStripeCustomer();
+                if ($stripeCustomer === false) {
+                    return false;
+                }
+            }
+
+            // Card
+            if ($stripeCustomer->getCreditCard($token) === false) {
+                $stripeCreditCard = $stripeCustomer->addCreditCard($token);
+                if ($stripeCreditCard === false) {
+                    return false;
+                }
+            }
+            $stripeCreditCard = $stripeCustomer->setDefaultCreditCard($token);
+            if ($stripeCreditCard === false) {
+                return false;
+            }
+
+            // Taxes
+
+
+
+            // Plan
+            $stripePlan = $user->getStripeCustomer()->getPlan();
+            if ($stripePlan === false) {
+                // $stripePlan = 
+            }
+            $stripePlan = self::getPlan($planId);
+            if ($stripePlan === false) {
+
+            }
+            $plan = $this->createPlan($user, $planId);
+            $subscription = $this->subscribeToPlan($user, $plan);
+
 
             /**
              * Taxes

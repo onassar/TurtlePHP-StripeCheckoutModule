@@ -139,8 +139,6 @@
 
     // config storage
     \Plugin\Config::add(
-        'TurtlePHP-StripeModule',
-        array(
-            'provinces' => $provinces
-        )
+        'TurtlePHP-StripeModule.provinces',
+        $provinces
     );

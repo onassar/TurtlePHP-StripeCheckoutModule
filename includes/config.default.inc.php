@@ -5,6 +5,7 @@
 
     // 
     $applyTaxes = true;
+    $frequencyToggle = true;
     $currency = 'usd';
 
     /**
@@ -29,6 +30,7 @@
         'TurtlePHP-StripeModule',
         array(
             'applyTaxes' => $applyTaxes,
+            'frequencyToggle' => $frequencyToggle,
             'currency' => $currency,
             'credentials' => $credentials,
             'paths' => $paths
