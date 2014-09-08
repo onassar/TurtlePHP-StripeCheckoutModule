@@ -14,6 +14,7 @@
         DEFINE(__NAMESPACE__ . '\MODULE', $parent);
 
         // include models, controllers, helpers
+        require_once MODULE . '/controllers/Webhooks.class.php';
         require_once MODULE . '/includes/validation/ProjectSchemaValidator.class.php';
 
         // flow includes

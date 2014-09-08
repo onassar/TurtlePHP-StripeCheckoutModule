@@ -37,6 +37,7 @@
          */
         public function actionIndex()
         {
+exit(0);
             /**
              * Validation
              * 
