@@ -67,7 +67,7 @@
          *
          * @access public
          * @param  string $token
-         * @return StripeEventAccessor|false
+         * @return false|StripeEventAccessor
          */
         public function getStripeEventByToken($token)
         {
