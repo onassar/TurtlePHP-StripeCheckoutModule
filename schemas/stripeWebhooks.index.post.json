@@ -1,14 +1,23 @@
 [
     {
         "validator": ["Modules\\Stripe\\DataValidator", "dataInputted"],
-        "blocking": true
+        "blocking": true,
+        "error": {
+            "reference": "stripeWebhooks.index.post.json.0"
+        }
     },
     {
         "validator": ["Modules\\Stripe\\StripeValidator", "validEventInputted"],
-        "blocking": true
+        "blocking": true,
+        "error": {
+            "reference": "stripeWebhooks.index.post.json.1"
+        }
     },
     {
         "validator": ["Modules\\Stripe\\StripeValidator", "uniqueEventInputted"],
-        "blocking": true
+        "blocking": true,
+        "error": {
+            "reference": "stripeWebhooks.index.post.json.2"
+        }
     }
 ]
